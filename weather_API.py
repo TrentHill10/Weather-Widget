@@ -1,7 +1,7 @@
 import json
 import requests
 
-api_file = open("api.key", 'r')
+api_file = open('C:/Users/Trent/Downloads/api.key', 'r')
 key = api_file.read()
 
 zip_code = str(22192)
@@ -13,7 +13,7 @@ api_status = requests.get('http://api.weatherapi.com/v1/current.json?key=' + key
 
 api_info = api_status.text
 
-#print(api_info)
+print(api_info)
 
 parse_json = json.loads(api_info)
 

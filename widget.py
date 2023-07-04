@@ -1,18 +1,39 @@
-from PyQt5.QtCore import QSize, Qt 
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton
+from PyQt5 import QtGui, QtCore, QtWidgets
+from PyQt5.QtGui import QPixmap
+from PyQt5.QtCore import QSize, Qt, QPoint
+from PyQt5.QtWidgets import *
 import sys
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        self.setWindowTitle('Weather App')
+        self.acceptDrops()
 
-        button = QPushButton('Press Me!)')
+        self.setWindowTitle('Weather App')
         
         self.setFixedSize(QSize(400, 300))
 
-        self.setCentralWidget(button)
+        self.setWindowFlags(Qt.FramelessWindowHint)
+
+        #Adding image of sun to widget
+        self.label = QLabel(self)
+        self.pixmap = QPixmap('sun_icon.png')
+        self.label.setPixmap(self.pixmap)
+        self.label.resize(self.pixmap.width(), self.pixmap.height())
+
+        self.show()
+
+
+
+    def mousePressEvent(self, event):
+        self.tabPosition = event.globalPos()
+
+    def mouseMoveEvent(self, event):
+        num = QPoint(event.globalPos() - self.tabPosition)
+        self.move(self.x() + num.x(), self.y() + num.y())
+        self.tabPosition = event.globalPos()
+        
 
 app = QApplication(sys.argv)
 
