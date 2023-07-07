@@ -13,7 +13,7 @@ api_status = requests.get('http://api.weatherapi.com/v1/current.json?key=' + key
 
 api_info = api_status.text
 
-print(api_info)
+#print(api_info)
 
 parse_json = json.loads(api_info)
 
